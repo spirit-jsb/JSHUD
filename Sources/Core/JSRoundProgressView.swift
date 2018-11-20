@@ -104,7 +104,7 @@ public class JSRoundProgressView: UIView {
             progressPath.lineCapStyle = .butt
             
             let center = CGPoint(x: self.bounds.midX, y: self.bounds.midY)
-            let radius = (self.bounds.width / 2.0) - (lineWidth / 2.0)
+            let radius = (self.bounds.width / 2.0) - lineWidth
             let startAngle: CGFloat = -(.pi / 2.0)
             let endAngle = (self.progress * 2.0 * .pi) + startAngle
             
