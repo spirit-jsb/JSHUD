@@ -68,33 +68,32 @@ public class JSBarProgressView: UIView {
         context?.addArc(tangent1End: CGPoint(x: 2.0, y: rect_height - 2.0), tangent2End: CGPoint(x: 2.0, y: rect_height / 2.0), radius: radius)
         
         context?.drawPath(using: .fillStroke)
-        
-        // Draw progress
         context?.setFillColor(self.progressColor.cgColor)
-        
+
+        // Draw progress
         let amount = self.progress * rect_width
         radius = radius - 2.0
-        
+
         if amount >= radius + 4.0 && amount <= (rect_width - radius - 4.0) {
             context?.move(to: CGPoint(x: 4.0, y: rect_height / 2.0))
             context?.addArc(tangent1End: CGPoint(x: 4.0, y: 4.0), tangent2End: CGPoint(x: radius + 4.0, y: 4.0), radius: radius)
+            context?.addLine(to: CGPoint(x: amount, y: 4.0))
             context?.addLine(to: CGPoint(x: amount, y: radius + 4.0))
-            context?.addLine(to: CGPoint(x: amount, y: radius + 4.0))
-            
+
             context?.move(to: CGPoint(x: 4.0, y: rect_height / 2.0))
             context?.addArc(tangent1End: CGPoint(x: 4.0, y: rect_height - 4.0), tangent2End: CGPoint(x: radius + 4.0, y: rect_height - 4.0), radius: radius)
             context?.addLine(to: CGPoint(x: amount, y: rect_height - 4.0))
             context?.addLine(to: CGPoint(x: amount, y: radius + 4.0))
-            
+
             context?.fillPath()
         }
         else if amount > radius + 4.0 {
             let x = amount - (rect_width - radius - 4.0)
-            
+
             context?.move(to: CGPoint(x: 4.0, y: rect_height / 2.0))
             context?.addArc(tangent1End: CGPoint(x: 4.0, y: 4.0), tangent2End: CGPoint(x: radius + 4.0, y: 4.0), radius: radius)
             context?.addLine(to: CGPoint(x: rect_width - radius - 4.0, y: 4.0))
-            
+
             var angle = -acos(x / radius)
             if angle.isNaN {
                 angle = 0.0
@@ -102,30 +101,30 @@ public class JSBarProgressView: UIView {
 
             context?.addArc(center: CGPoint(x: rect_width - radius - 4.0, y: rect_height / 2.0), radius: radius, startAngle: .pi, endAngle: angle, clockwise: false)
             context?.addLine(to: CGPoint(x: amount, y: rect_height / 2.0))
-            
+
             context?.move(to: CGPoint(x: 4.0, y: rect_height / 2.0))
             context?.addArc(tangent1End: CGPoint(x: 4.0, y: rect_height - 4.0), tangent2End: CGPoint(x: radius + 4.0, y: rect_height - 4.0), radius: radius)
             context?.addLine(to: CGPoint(x: rect_width - radius - 4.0, y: rect_height - 4.0))
-            
+
             angle = acos(x / radius)
             if angle.isNaN {
                 angle = 0.0
             }
-            
-            context?.addArc(center: CGPoint(x: rect_width - radius - 4.0, y: rect_height / 2.0), radius: radius, startAngle: -.pi, endAngle: angle, clockwise: true)
+
+            context?.addArc(center: CGPoint(x: rect_width - radius - 4.0, y: rect_height / 2.0), radius: radius, startAngle: -(.pi), endAngle: angle, clockwise: true)
             context?.addLine(to: CGPoint(x: amount, y: rect_height / 2.0))
-            
+
             context?.fillPath()
         }
         else if amount < radius + 4.0 && amount > 0.0 {
             context?.move(to: CGPoint(x: 4.0, y: rect_height / 2.0))
             context?.addArc(tangent1End: CGPoint(x: 4.0, y: 4.0), tangent2End: CGPoint(x: radius + 4.0, y: 4.0), radius: radius)
             context?.addLine(to: CGPoint(x: radius + 4.0, y: rect_height / 2.0))
-            
+
             context?.move(to: CGPoint(x: 4.0, y: rect_height / 2.0))
             context?.addArc(tangent1End: CGPoint(x: 4.0, y: rect_height - 4.0), tangent2End: CGPoint(x: radius + 4.0, y: rect_height - 4.0), radius: radius)
             context?.addLine(to: CGPoint(x: radius + 4.0, y: rect_height / 2.0))
-         
+
             context?.fillPath()
         }
     }
