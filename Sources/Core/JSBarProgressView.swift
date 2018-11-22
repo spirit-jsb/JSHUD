@@ -11,25 +11,34 @@ import UIKit
 public class JSBarProgressView: UIView {
 
     // MARK: 属性
-    public var progress: CGFloat = 0.0 {
-        didSet {
+    public var progress: Float = 0.0 {
+        willSet {
+            if newValue < 0.0 || newValue > 1.0 {
+                return
+            }
             self.setNeedsDisplay()
         }
     }
     
-    public var borderColor: UIColor = UIColor.white
-    
-    public var progressColor: UIColor = UIColor.white {
+    public var borderColor: UIColor = UIColor.black {
         didSet {
-            if self.progressColor != oldValue {
+            if self.borderColor != oldValue {
                 self.setNeedsDisplay()
             }
         }
     }
     
-    public var progressRemainingColor: UIColor = UIColor.clear {
+    public var progressTintColor: UIColor = UIColor.black {
         didSet {
-            if self.progressRemainingColor != oldValue {
+            if self.progressTintColor != oldValue {
+                self.setNeedsDisplay()
+            }
+        }
+    }
+    
+    public var trackTintColor: UIColor = UIColor.white {
+        didSet {
+            if self.trackTintColor != oldValue {
                 self.setNeedsDisplay()
             }
         }
@@ -39,7 +48,7 @@ public class JSBarProgressView: UIView {
     convenience init() {
         self.init(frame: CGRect(x: 0.0, y: 0.0, width: 120.0, height: 20.0))
     }
-    
+
     public override init(frame: CGRect) {
         super.init(frame: frame)
         self.setupView()
@@ -49,95 +58,86 @@ public class JSBarProgressView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public override func draw(_ rect: CGRect) {
-        let context = UIGraphicsGetCurrentContext()
-        
-        // Draw background and border
-        context?.setLineWidth(2.0)
-        context?.setStrokeColor(self.borderColor.cgColor)
-        context?.setFillColor(self.progressRemainingColor.cgColor)
-        
-        let rect_width = rect.size.width
-        let rect_height = rect.size.height
-        var radius = (rect.size.height / 2.0) - 2.0
-        
-        context?.move(to: CGPoint(x: 2.0, y: rect_height / 2.0))
-        context?.addArc(tangent1End: CGPoint(x: 2.0, y: 2.0), tangent2End: CGPoint(x: radius + 2.0, y: 2.0), radius: radius)
-        context?.addArc(tangent1End: CGPoint(x: rect_width - 2.0, y: 2.0), tangent2End: CGPoint(x: rect_width - 2.0, y: rect_height / 2.0), radius: radius)
-        context?.addArc(tangent1End: CGPoint(x: rect_width - 2.0, y: rect_height - 2.0), tangent2End: CGPoint(x: rect_width - radius - 2.0, y: rect_height - 2.0), radius: radius)
-        context?.addArc(tangent1End: CGPoint(x: 2.0, y: rect_height - 2.0), tangent2End: CGPoint(x: 2.0, y: rect_height / 2.0), radius: radius)
-        
-        context?.drawPath(using: .fillStroke)
-        context?.setFillColor(self.progressColor.cgColor)
-
-        // Draw progress
-        let amount = self.progress * rect_width
-        radius = radius - 2.0
-
-        if amount >= radius + 4.0 && amount <= (rect_width - radius - 4.0) {
-            context?.move(to: CGPoint(x: 4.0, y: rect_height / 2.0))
-            context?.addArc(tangent1End: CGPoint(x: 4.0, y: 4.0), tangent2End: CGPoint(x: radius + 4.0, y: 4.0), radius: radius)
-            context?.addLine(to: CGPoint(x: amount, y: 4.0))
-            context?.addLine(to: CGPoint(x: amount, y: radius + 4.0))
-
-            context?.move(to: CGPoint(x: 4.0, y: rect_height / 2.0))
-            context?.addArc(tangent1End: CGPoint(x: 4.0, y: rect_height - 4.0), tangent2End: CGPoint(x: radius + 4.0, y: rect_height - 4.0), radius: radius)
-            context?.addLine(to: CGPoint(x: amount, y: rect_height - 4.0))
-            context?.addLine(to: CGPoint(x: amount, y: radius + 4.0))
-
-            context?.fillPath()
-        }
-        else if amount > radius + 4.0 {
-            let x = amount - (rect_width - radius - 4.0)
-
-            context?.move(to: CGPoint(x: 4.0, y: rect_height / 2.0))
-            context?.addArc(tangent1End: CGPoint(x: 4.0, y: 4.0), tangent2End: CGPoint(x: radius + 4.0, y: 4.0), radius: radius)
-            context?.addLine(to: CGPoint(x: rect_width - radius - 4.0, y: 4.0))
-
-            var angle = -acos(x / radius)
-            if angle.isNaN {
-                angle = 0.0
-            }
-
-            context?.addArc(center: CGPoint(x: rect_width - radius - 4.0, y: rect_height / 2.0), radius: radius, startAngle: .pi, endAngle: angle, clockwise: false)
-            context?.addLine(to: CGPoint(x: amount, y: rect_height / 2.0))
-
-            context?.move(to: CGPoint(x: 4.0, y: rect_height / 2.0))
-            context?.addArc(tangent1End: CGPoint(x: 4.0, y: rect_height - 4.0), tangent2End: CGPoint(x: radius + 4.0, y: rect_height - 4.0), radius: radius)
-            context?.addLine(to: CGPoint(x: rect_width - radius - 4.0, y: rect_height - 4.0))
-
-            angle = acos(x / radius)
-            if angle.isNaN {
-                angle = 0.0
-            }
-
-            context?.addArc(center: CGPoint(x: rect_width - radius - 4.0, y: rect_height / 2.0), radius: radius, startAngle: -(.pi), endAngle: angle, clockwise: true)
-            context?.addLine(to: CGPoint(x: amount, y: rect_height / 2.0))
-
-            context?.fillPath()
-        }
-        else if amount < radius + 4.0 && amount > 0.0 {
-            context?.move(to: CGPoint(x: 4.0, y: rect_height / 2.0))
-            context?.addArc(tangent1End: CGPoint(x: 4.0, y: 4.0), tangent2End: CGPoint(x: radius + 4.0, y: 4.0), radius: radius)
-            context?.addLine(to: CGPoint(x: radius + 4.0, y: rect_height / 2.0))
-
-            context?.move(to: CGPoint(x: 4.0, y: rect_height / 2.0))
-            context?.addArc(tangent1End: CGPoint(x: 4.0, y: rect_height - 4.0), tangent2End: CGPoint(x: radius + 4.0, y: rect_height - 4.0), radius: radius)
-            context?.addLine(to: CGPoint(x: radius + 4.0, y: rect_height / 2.0))
-
-            context?.fillPath()
-        }
-    }
-    
-    public override var intrinsicContentSize: CGSize {
-        return CGSize(width: 120.0, height: 10.0)
-    }
-    
     // MARK: 设置方法
     private func setupView() {
         self.backgroundColor = UIColor.clear
         self.isOpaque = false
     }
+
+    // MARK: 重写父类方法
+    public override var intrinsicContentSize: CGSize {
+        return CGSize(width: 120.0, height: 10.0)
+    }
     
-    // MARK: 私有方法
+    public override func draw(_ rect: CGRect) {
+        let content = UIGraphicsGetCurrentContext()
+        
+        let width = rect.width
+        let height = rect.height
+        let half_width = width / 2.0
+        let half_height = height / 2.0
+        
+        // Draw background and border
+        let backgroundRadius = half_height - 2.0
+        
+        content?.setLineWidth(2.0)
+        content?.setStrokeColor(self.borderColor.cgColor)
+        content?.setFillColor(self.trackTintColor.cgColor)
+        
+        content?.move(to: CGPoint(x: 2.0, y: half_height))
+        content?.addArc(tangent1End: CGPoint(x: 2.0, y: 2.0), tangent2End: CGPoint(x: backgroundRadius + 2.0, y: 2.0), radius: backgroundRadius)
+        content?.addArc(tangent1End: CGPoint(x: width - 2.0, y: 2.0), tangent2End: CGPoint(x: width - 2.0, y: half_height), radius: backgroundRadius)
+        content?.addArc(tangent1End: CGPoint(x: width - 2.0, y: height - 2.0), tangent2End: CGPoint(x: width - backgroundRadius - 2.0, y: height - 2.0), radius: backgroundRadius)
+        content?.addArc(tangent1End: CGPoint(x: 2.0, y: height - 2.0), tangent2End: CGPoint(x: 2.0, y: half_height), radius: backgroundRadius)
+        
+        content?.drawPath(using: .fillStroke)
+        
+        // Draw progress
+        let progressWidth = width * CGFloat(self.progress)
+        let progressRadius = half_height - 4.0
+        
+        content?.setFillColor(self.progressTintColor.cgColor)
+        
+        if progressWidth >= progressRadius + 4.0 && progressWidth <= width - progressRadius - 4.0 {
+            content?.move(to: CGPoint(x: 4.0, y: half_height))
+            content?.addArc(tangent1End: CGPoint(x: 4.0, y: 4.0), tangent2End: CGPoint(x: progressRadius + 4.0, y: 4.0), radius: progressRadius)
+            content?.addLine(to: CGPoint(x: progressWidth, y: 4.0))
+            content?.addLine(to: CGPoint(x: progressWidth, y: height - 4.0))
+            content?.addLine(to: CGPoint(x: progressRadius + 4.0, y: height - 4.0))
+            content?.addArc(tangent1End: CGPoint(x: 4.0, y: height - 4.0), tangent2End: CGPoint(x: 4.0, y: half_height), radius: progressRadius)
+            
+            content?.fillPath()
+        }
+        else if progressWidth < progressRadius + 4.0 && progressWidth > 0 {
+            content?.move(to: CGPoint(x: 4.0, y: half_height))
+            content?.addArc(tangent1End: CGPoint(x: 4.0, y: 4.0), tangent2End: CGPoint(x: progressRadius + 4.0, y: 4.0), radius: progressRadius)
+            content?.addLine(to: CGPoint(x: progressRadius + 4.0, y: height - 4.0))
+            content?.addArc(tangent1End: CGPoint(x: 4.0, y: height - 4.0), tangent2End: CGPoint(x: 4.0, y: half_height), radius: progressRadius)
+        
+            content?.fillPath()
+        }
+        else if progressWidth > width - progressRadius - 4.0 {
+            let tempX = progressWidth - (width - progressRadius - 4.0)
+            var angle = acos(tempX / progressRadius)
+            if angle.isNaN {
+                angle = 0.0
+            }
+            
+            content?.move(to: CGPoint(x: 4.0, y: half_height))
+            content?.addArc(tangent1End: CGPoint(x: 4.0, y: 4.0), tangent2End: CGPoint(x: progressRadius + 4.0, y: 4.0), radius: progressRadius)
+            content?.addLine(to: CGPoint(x: width - progressRadius - 4.0, y: 4.0))
+            
+            content?.addArc(center: CGPoint(x: width - progressRadius - 4.0, y: half_height), radius: progressRadius, startAngle: .pi, endAngle: -(angle), clockwise: false)
+            content?.addLine(to: CGPoint(x: progressWidth, y: half_height))
+            
+            content?.move(to: CGPoint(x: 4.0, y: half_height))
+            content?.addArc(tangent1End: CGPoint(x: 4.0, y: height - 4.0), tangent2End: CGPoint(x: progressRadius + 4.0, y: height - 4.0), radius: progressRadius)
+            content?.addLine(to: CGPoint(x: width - progressRadius - 4.0, y: height - 4.0))
+            
+            content?.addArc(center: CGPoint(x: width - progressRadius - 4.0, y: half_height), radius: progressRadius, startAngle: -(.pi), endAngle: angle, clockwise: true)
+            content?.addLine(to: CGPoint(x: progressWidth, y: half_height))
+            
+            content?.fillPath()
+        }
+    }
 }
