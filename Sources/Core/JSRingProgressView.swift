@@ -11,7 +11,7 @@ import UIKit
 public class JSRingProgressView: UIView {
 
     // MARK: 属性
-    public var progress: CGFloat = 0.0 {
+    public var progress: Float = 0.0 {
         willSet {
             if newValue < 0.0 || newValue > 1.0 {
                 return
@@ -83,7 +83,7 @@ public class JSRingProgressView: UIView {
         let center = CGPoint(x: self.bounds.midX, y: self.bounds.midY)
         let radius = (self.bounds.width / 2.0) - lineWidth
         let startAngle: CGFloat = -(.pi / 2.0)
-        let endAngle = (self.progress * 2.0 * .pi) + startAngle
+        let endAngle = (CGFloat(self.progress) * 2.0 * .pi) + startAngle
         
         progressPath.addArc(withCenter: center, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: true)
         
