@@ -1,5 +1,5 @@
 //
-//  JSRoundProgressView.swift
+//  JSRingProgressView.swift
 //  JSProgressHUD
 //
 //  Created by Max on 2018/11/19.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class JSRoundProgressView: UIView {
+public class JSRingProgressView: UIView {
 
     // MARK: 属性
     public var progress: CGFloat = 0.0 {
@@ -35,10 +35,10 @@ public class JSRoundProgressView: UIView {
             }
         }
     }
-        
+    
     // MARK: 初始化
     convenience init() {
-        self.init(frame: CGRect(x: 0.0, y: 0.0, width: 37.0, height: 37.0))
+        self.init(frame: CGRect(x: 0.0, y: 0.0, width: 40.0, height: 40.0))
     }
     
     public override init(frame: CGRect) {
@@ -58,7 +58,7 @@ public class JSRoundProgressView: UIView {
     
     // MARK: 重写父类方法
     public override var intrinsicContentSize: CGSize {
-        return CGSize(width: 37.0, height: 37.0)
+        return CGSize(width: 40.0, height: 40.0)
     }
     
     public override func draw(_ rect: CGRect) {
