@@ -13,13 +13,15 @@ public class JSBackgroundView: UIView {
     // MARK: 属性
     public var backgroundStyle: JSProgressHUDBackgroundStyle = .blur {
         didSet {
-            self.resetBackgroundStyle()
+            if self.backgroundStyle != oldValue {
+                self.resetBackgroundStyle()
+            }
         }
     }
     
-    public var blurEffectStyle: UIBlurEffect.Style = .light {
+    public var blurStyle: UIBlurEffect.Style = .light {
         didSet {
-            if self.blurEffectStyle != oldValue {
+            if self.blurStyle != oldValue {
                 self.resetBackgroundStyle()
             }
         }
@@ -45,14 +47,15 @@ public class JSBackgroundView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public override var intrinsicContentSize: CGSize {
-        return .zero
-    }
-    
     // MARK: 设置方法
     private func setupView() {
         self.clipsToBounds = true
         self.resetBackgroundStyle()
+    }
+    
+    // MARK: 重写父类方法
+    public override var intrinsicContentSize: CGSize {
+        return .zero
     }
     
     // MARK: 私有方法
@@ -61,7 +64,7 @@ public class JSBackgroundView: UIView {
         self.effectView = nil
         
         if self.backgroundStyle == .blur {
-            let effect = UIBlurEffect(style: self.blurEffectStyle)
+            let effect = UIBlurEffect(style: self.blurStyle)
             let effectView = UIVisualEffectView(effect: effect)
             
             effectView.frame = self.bounds
