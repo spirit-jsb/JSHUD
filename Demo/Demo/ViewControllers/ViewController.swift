@@ -7,12 +7,284 @@
 //
 
 import UIKit
+import JSProgressHUD
 
-class ViewController: UIViewController {
+struct JSExample {
+    let title: String
+    let selector: Selector
+    
+    init(withTitle title: String, selector: Selector) {
+        self.title = title
+        self.selector = selector
+    }
+}
+
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
+    // MARK: 属性
+    var examples: [[JSExample]] = [[JSExample(withTitle: "Loading Example", selector: #selector(loadingExample)),
+                                    JSExample(withTitle: "With label Example", selector: #selector(labelExample)),
+                                    JSExample(withTitle: "With details label Example", selector: #selector(detailsLabelExample))],
+                                   [JSExample(withTitle: "Bar progress Example", selector: #selector(barExample)),
+                                    JSExample(withTitle: "Ring progress Example", selector: #selector(ringExample)),
+                                    JSExample(withTitle: "Sector progress Example", selector: #selector(sectorExample))],
+                                   [JSExample(withTitle: "BarProgress Example", selector: #selector(barProgressExample)),
+                                    JSExample(withTitle: "RingProgress Example", selector: #selector(ringProgressExample)),
+                                    JSExample(withTitle: "SectorProgress Example", selector: #selector(sectorProgressExample))],
+                                   [JSExample(withTitle: "Text Example", selector: #selector(textExample)),
+                                    JSExample(withTitle: "Custom Example", selector: #selector(customExample))],
+                                   [JSExample(withTitle: "Mode switching", selector: #selector(modeSwitchingExample))]]
 
     // MARK: 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
+    // MARK: Example
+    @objc private func loadingExample() {
+        let hud = JSProgressHUD.showHUD(addTo: self.navigationController!.view, animated: true)
+        DispatchQueue.global().async {
+            self.doSomeWork()
+            DispatchQueue.main.async {
+                hud.hideAnimated(true)
+            }
+        }
+    }
+    
+    @objc private func labelExample() {
+        let hud = JSProgressHUD.showHUD(addTo: self.navigationController!.view, animated: true)
+        hud.label.text = "Loading..."
+        DispatchQueue.global().async {
+            self.doSomeWork()
+            DispatchQueue.main.async {
+                hud.hideAnimated(true)
+            }
+        }
+    }
+    
+    @objc private func detailsLabelExample() {
+        let hud = JSProgressHUD.showHUD(addTo: self.navigationController!.view, animated: true)
+        hud.label.text = "Loading..."
+        hud.detailsLabel.text = "Parsing data\n(1/1)"
+        DispatchQueue.global().async {
+            self.doSomeWork()
+            DispatchQueue.main.async {
+                hud.hideAnimated(true)
+            }
+        }
+    }
+    
+    @objc private func barExample() {
+        let hud = JSProgressHUD.showHUD(addTo: self.navigationController!.view, animated: true)
+        hud.mode = .barProgress
+        hud.label.text = "Loading..."
+        DispatchQueue.global().async {
+            self.doSomeWorkWithProgress()
+            DispatchQueue.main.async {
+                hud.hideAnimated(true)
+            }
+        }
+    }
+    
+    @objc private func ringExample() {
+        let hud = JSProgressHUD.showHUD(addTo: self.navigationController!.view, animated: true)
+        hud.mode = .ringProgress
+        hud.label.text = "Loading..."
+        hud.detailsLabel.text = "Parsing data\n(1/1)"
+        DispatchQueue.global().async {
+            self.doSomeWorkWithProgress()
+            DispatchQueue.main.async {
+                hud.hideAnimated(true)
+            }
+        }
+    }
+    
+    @objc private func sectorExample() {
+        let hud = JSProgressHUD.showHUD(addTo: self.navigationController!.view, animated: true)
+        hud.mode = .sectorProgress
+        hud.label.text = "Loading..."
+        DispatchQueue.global().async {
+            self.doSomeWorkWithProgress()
+            DispatchQueue.main.async {
+                hud.hideAnimated(true)
+            }
+        }
+    }
+    
+    @objc private func barProgressExample() {
+        let hud = JSProgressHUD.showHUD(addTo: self.navigationController!.view, animated: true)
+        hud.mode = .barProgress
+        hud.label.text = "Loading..."
+        
+        let progressObject = Progress(totalUnitCount: 100)
+        hud.progressObject = progressObject
+        
+        DispatchQueue.global().async {
+            self.doSomeWorkWithProgressObject(progressObject)
+            DispatchQueue.main.async {
+                hud.hideAnimated(true)
+            }
+        }
+    }
+    
+    @objc private func ringProgressExample() {
+        let hud = JSProgressHUD.showHUD(addTo: self.navigationController!.view, animated: true)
+        hud.mode = .ringProgress
+        hud.label.text = "Loading..."
+        hud.detailsLabel.text = "Parsing data\n(1/1)"
+        
+        let progressObject = Progress(totalUnitCount: 100)
+        hud.progressObject = progressObject
+        
+        DispatchQueue.global().async {
+            self.doSomeWorkWithProgressObject(progressObject)
+            DispatchQueue.main.async {
+                hud.hideAnimated(true)
+            }
+        }
+    }
+    
+    @objc private func sectorProgressExample() {
+        let hud = JSProgressHUD.showHUD(addTo: self.navigationController!.view, animated: true)
+        hud.mode = .sectorProgress
+        hud.label.text = "Loading..."
+        
+        let progressObject = Progress(totalUnitCount: 100)
+        hud.progressObject = progressObject
+        
+        DispatchQueue.global().async {
+            self.doSomeWorkWithProgressObject(progressObject)
+            DispatchQueue.main.async {
+                hud.hideAnimated(true)
+            }
+        }
+    }
+    
+    @objc private func textExample() {
+        let hud = JSProgressHUD.showHUD(addTo: self.navigationController!.view, animated: true)
+        hud.mode = .text
+        hud.label.text = "Message here!"
+        
+        hud.offset = CGPoint(x: 0.0, y: JSProgressHUD.JSProgressMaxOffset)
+        
+        hud.hideAnimated(true, afterDelay: 3.0)
+    }
+    
+    @objc private func customExample() {
+        let hud = JSProgressHUD.showHUD(addTo: self.navigationController!.view, animated: true)
+        hud.mode = .custom
+        hud.label.text = "Success here!"
+        
+        let image = UIImage(named: "icon_check")?.withRenderingMode(.alwaysTemplate)
+        hud.customView = UIImageView(image: image)
+        
+        hud.hideAnimated(true, afterDelay: 3.0)
+    }
+    
+    @objc private func modeSwitchingExample() {
+        let hud = JSProgressHUD.showHUD(addTo: self.navigationController!.view, animated: true)
+        
+        hud.label.text = "Preparing..."
+        hud.minSize = CGSize(width: 150.0, height: 100.0)
+        
+        DispatchQueue.global().async {
+            self.doSomeWorkWithMixedProgress(hud)
+            DispatchQueue.main.async {
+                hud.hideAnimated(true)
+            }
+        }
+    }
+    
+    // MARK: 私有方法
+    private func doSomeWork() {
+        sleep(3)
+    }
+    
+    private func doSomeWorkWithProgress() {
+        var progress: Float = 0.0
+        while progress < 1.0 {
+            progress = progress + 0.01
+            DispatchQueue.main.async {
+                JSProgressHUD.HUD(for: self.navigationController!.view)?.progress = progress
+            }
+            usleep(50000)
+        }
+    }
+    
+    private func doSomeWorkWithProgressObject(_ progressObject: Progress) {
+        while progressObject.fractionCompleted < 1.0 {
+            progressObject.becomeCurrent(withPendingUnitCount: 1)
+            progressObject.resignCurrent()
+            usleep(50000)
+        }
+    }
+    
+    private func doSomeWorkWithMixedProgress(_ hud: JSProgressHUD) {
+        sleep(2)
+        
+        DispatchQueue.main.async {
+            hud.mode = .barProgress
+            hud.label.text = "Loading"
+        }
+        
+        var progress: Float = 0.0
+        while progress < 1.0 {
+            progress = progress + 0.01
+            DispatchQueue.main.async {
+                hud.progress = progress
+            }
+            usleep(50000)
+        }
+        
+        DispatchQueue.main.async {
+            hud.mode = .loading
+            hud.label.text = "Cleaning up..."
+        }
+        
+        sleep(2)
+        
+        DispatchQueue.main.sync {
+            hud.mode = .custom
+            hud.label.text = "Completed"
+            
+            let image = UIImage(named: "icon_check")?.withRenderingMode(.alwaysTemplate)
+            hud.customView = UIImageView(image: image)
+        }
+        
+        sleep(3)
+    }
+
+    // MARK: UITableViewDataSource
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.examples[section].count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let example = self.examples[indexPath.section][indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "JSExampleCell", for: indexPath)
+        cell.textLabel?.text = example.title
+        cell.textLabel?.textColor = self.view.tintColor
+        cell.textLabel?.textAlignment = .center
+        cell.selectedBackgroundView = UIView()
+        cell.selectedBackgroundView?.backgroundColor = cell.textLabel?.textColor.withAlphaComponent(0.1)
+        return cell
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return self.examples.count
+    }
+    
+    // MARK: UITableViewDelegate
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let example = self.examples[indexPath.section][indexPath.row]
+        self.perform(example.selector)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
     }
 }
 
