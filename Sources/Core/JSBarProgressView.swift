@@ -20,14 +20,6 @@ public class JSBarProgressView: UIView {
         }
     }
     
-    public var borderColor: UIColor = UIColor.black {
-        didSet {
-            if self.borderColor != oldValue {
-                self.setNeedsDisplay()
-            }
-        }
-    }
-    
     public var progressTintColor: UIColor = UIColor.black {
         didSet {
             if self.progressTintColor != oldValue {
@@ -81,7 +73,7 @@ public class JSBarProgressView: UIView {
         let backgroundRadius = half_height - 2.0
         
         content?.setLineWidth(2.0)
-        content?.setStrokeColor(self.borderColor.cgColor)
+        content?.setStrokeColor(self.progressTintColor.cgColor)
         content?.setFillColor(self.trackTintColor.cgColor)
         
         content?.move(to: CGPoint(x: 2.0, y: half_height))
