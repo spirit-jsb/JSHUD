@@ -19,7 +19,7 @@ struct JSExample {
     }
 }
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, URLSessionDownloadDelegate {
     
     // MARK: 属性
     var examples: [[JSExample]] = [[JSExample(withTitle: "Loading Example", selector: #selector(loadingExample)),
@@ -33,7 +33,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                                     JSExample(withTitle: "SectorProgress Example", selector: #selector(sectorProgressExample))],
                                    [JSExample(withTitle: "Text Example", selector: #selector(textExample)),
                                     JSExample(withTitle: "Custom Example", selector: #selector(customExample))],
-                                   [JSExample(withTitle: "Mode switching", selector: #selector(modeSwitchingExample))]]
+                                   [JSExample(withTitle: "Mode switching", selector: #selector(modeSwitchingExample)),
+                                    JSExample(withTitle: "Window Example", selector: #selector(windowExample)),
+                                    JSExample(withTitle: "Networking Example", selector: #selector(networkingExample)),
+                                    JSExample(withTitle: "Solid Background Color", selector: #selector(solidBackgroundColor)),
+                                    JSExample(withTitle: "Content Color Example", selector: #selector(contentColorExample))]]
 
     // MARK: 生命周期
     override func viewDidLoad() {
@@ -199,6 +203,52 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
+    @objc private func windowExample() {
+        let hud = JSProgressHUD.showHUD(addTo: self.view.window!, animated: true)
+        DispatchQueue.global().async {
+            self.doSomeWork()
+            DispatchQueue.main.async {
+                hud.hideAnimated(true)
+            }
+        }
+    }
+    
+    @objc private func networkingExample() {
+        let hud = JSProgressHUD.showHUD(addTo: self.navigationController!.view, animated: true)
+        hud.label.text = "Preparing..."
+        hud.minSize = CGSize(width: 150.0, height: 100.0)
+        
+        self.doSomeNetworkWorkWithProgress()
+    }
+    
+    @objc private func solidBackgroundColor() {
+        let hud = JSProgressHUD.showHUD(addTo: self.navigationController!.view, animated: true)
+        
+        hud.backgroundView.backgroundStyle = .solidColor
+        hud.backgroundView.color = UIColor.red.withAlphaComponent(0.1)
+        
+        DispatchQueue.global().async {
+            self.doSomeWork()
+            DispatchQueue.main.async {
+                hud.hideAnimated(true)
+            }
+        }
+    }
+    
+    @objc private func contentColorExample() {
+        let hud = JSProgressHUD.showHUD(addTo: self.navigationController!.view, animated: true)
+        hud.contentColor = UIColor(red: 0.0, green: 0.6, blue: 0.7, alpha: 1.0)
+        
+        hud.label.text = "Loading..."
+        
+        DispatchQueue.global().async {
+            self.doSomeWork()
+            DispatchQueue.main.async {
+                hud.hideAnimated(true)
+            }
+        }
+    }
+    
     // MARK: 私有方法
     private func doSomeWork() {
         sleep(3)
@@ -257,6 +307,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         sleep(3)
     }
+    
+    private func doSomeNetworkWorkWithProgress() {
+        let sessionConfiguration = URLSessionConfiguration.default
+        let session = URLSession(configuration: sessionConfiguration, delegate: self, delegateQueue: nil)
+        let url = URL(string: "https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/HT1425/sample_iPod.m4v.zip")
+        let task = session.downloadTask(with: url!)
+        task.resume()
+    }
 
     // MARK: UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -284,6 +342,29 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.perform(example.selector)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             tableView.deselectRow(at: indexPath, animated: true)
+        }
+    }
+    
+    // MARK: URLSessionDelegate
+    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
+        DispatchQueue.main.async {
+            let hud = JSProgressHUD.HUD(for: self.navigationController!.view)
+            hud?.mode = .custom
+            hud?.label.text = "Success here!"
+            
+            let image = UIImage(named: "icon_check")?.withRenderingMode(.alwaysTemplate)
+            hud?.customView = UIImageView(image: image)
+            
+            hud?.hideAnimated(true, afterDelay: 3.0)
+        }
+    }
+    
+    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
+        let progress: Float = Float(totalBytesWritten) / Float(totalBytesExpectedToWrite)
+        DispatchQueue.main.async {
+            let hud = JSProgressHUD.HUD(for: self.navigationController!.view)
+            hud?.mode = .barProgress
+            hud?.progress = progress
         }
     }
 }
