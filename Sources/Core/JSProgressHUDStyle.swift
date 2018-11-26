@@ -9,11 +9,11 @@
 import Foundation
 
 public enum JSProgressHUDMode {
-    case indeterminate
-    case determinate
-    case determinateHorizontalBar
-    case annularDeterminate
-    case customView
+    case loading
+    case barProgress
+    case ringProgress
+    case sectorProgress
+    case custom
     case text
 }
 
