@@ -11,7 +11,7 @@ import UIKit
 public class JSRingProgressView: UIView {
 
     // MARK: 属性
-    public var progress: Float = 0.0 {
+    @objc public var progress: Float = 0.0 {
         willSet {
             if newValue < 0.0 || newValue > 1.0 {
                 return
@@ -20,7 +20,7 @@ public class JSRingProgressView: UIView {
         }
     }
     
-    public var progressTintColor: UIColor = UIColor.black {
+    @objc public dynamic var progressTintColor: UIColor! {
         didSet {
             if self.progressTintColor != oldValue {
                 self.setNeedsDisplay()
@@ -28,7 +28,7 @@ public class JSRingProgressView: UIView {
         }
     }
     
-    public var trackTintColor: UIColor = UIColor.white {
+    @objc public dynamic var trackTintColor: UIColor! {
         didSet {
             if self.trackTintColor != oldValue {
                 self.setNeedsDisplay()
