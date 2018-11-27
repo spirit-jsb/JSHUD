@@ -19,7 +19,7 @@ struct JSExample {
     }
 }
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, URLSessionDownloadDelegate {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, URLSessionDownloadDelegate, JSProgressHUDDelegate {
     
     // MARK: 属性
     var examples: [[JSExample]] = [[JSExample(withTitle: "Loading Example", selector: #selector(loadingExample)),
@@ -192,6 +192,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @objc private func modeSwitchingExample() {
         let hud = JSProgressHUD.showHUD(addTo: self.navigationController!.view, animated: true)
         
+        hud.tag = 1
+        hud.delegate = self
         hud.label.text = "Preparing..."
         hud.minSize = CGSize(width: 150.0, height: 100.0)
         
@@ -366,6 +368,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             hud?.mode = .barProgress
             hud?.progress = progress
         }
+    }
+    
+    // MARK: JSProgressHUDDelegate
+    func hudWasHidden(_ hud: JSProgressHUD) {
+        print("HUD Tag: \(hud.tag) was Hidden")
     }
 }
 
