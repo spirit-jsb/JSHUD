@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
 
-    s.name             = 'JSProgressHUD'
+    s.name             = 'JSHUD'
     s.version          = '1.0.0'
     s.summary          = '一个简便易用的自定义 Progress HUD 框架。'
   
