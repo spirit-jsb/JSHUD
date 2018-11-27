@@ -14,6 +14,11 @@
 		50DB470121A24EE20062F6A5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50DB470021A24EE20062F6A5 /* CoreGraphics.framework */; };
 		50DB470321A24EE80062F6A5 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50DB470221A24EE80062F6A5 /* QuartzCore.framework */; };
 		50DB470521A24FA00062F6A5 /* JSProgressHUDStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50DB470421A24FA00062F6A5 /* JSProgressHUDStyle.swift */; };
+		50DB470721A267050062F6A5 /* JSBarProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50DB470621A267040062F6A5 /* JSBarProgressView.swift */; };
+		50DB470921A287EB0062F6A5 /* JSRingProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50DB470821A287EB0062F6A5 /* JSRingProgressView.swift */; };
+		50DB470B21A296520062F6A5 /* JSProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50DB470A21A296520062F6A5 /* JSProgressHUD.swift */; };
+		50DB470D21A297450062F6A5 /* JSProgressHUDDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50DB470C21A297450062F6A5 /* JSProgressHUDDelegate.swift */; };
+		50E8A5CB21A6A97800DADF75 /* JSSectorProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E8A5CA21A6A97800DADF75 /* JSSectorProgressView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +31,11 @@
 		50DB470021A24EE20062F6A5 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		50DB470221A24EE80062F6A5 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		50DB470421A24FA00062F6A5 /* JSProgressHUDStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSProgressHUDStyle.swift; sourceTree = "<group>"; };
+		50DB470621A267040062F6A5 /* JSBarProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSBarProgressView.swift; sourceTree = "<group>"; };
+		50DB470821A287EB0062F6A5 /* JSRingProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSRingProgressView.swift; sourceTree = "<group>"; };
+		50DB470A21A296520062F6A5 /* JSProgressHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSProgressHUD.swift; sourceTree = "<group>"; };
+		50DB470C21A297450062F6A5 /* JSProgressHUDDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSProgressHUDDelegate.swift; sourceTree = "<group>"; };
+		50E8A5CA21A6A97800DADF75 /* JSSectorProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSSectorProgressView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,7 +84,12 @@
 			isa = PBXGroup;
 			children = (
 				50DB470421A24FA00062F6A5 /* JSProgressHUDStyle.swift */,
+				50DB470C21A297450062F6A5 /* JSProgressHUDDelegate.swift */,
+				50DB470A21A296520062F6A5 /* JSProgressHUD.swift */,
 				50DB46FE21A24ED40062F6A5 /* JSBackgroundView.swift */,
+				50DB470621A267040062F6A5 /* JSBarProgressView.swift */,
+				50DB470821A287EB0062F6A5 /* JSRingProgressView.swift */,
+				50E8A5CA21A6A97800DADF75 /* JSSectorProgressView.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -169,8 +184,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				50DB470B21A296520062F6A5 /* JSProgressHUD.swift in Sources */,
 				50DB46FF21A24ED40062F6A5 /* JSBackgroundView.swift in Sources */,
+				50E8A5CB21A6A97800DADF75 /* JSSectorProgressView.swift in Sources */,
+				50DB470D21A297450062F6A5 /* JSProgressHUDDelegate.swift in Sources */,
+				50DB470921A287EB0062F6A5 /* JSRingProgressView.swift in Sources */,
 				50DB470521A24FA00062F6A5 /* JSProgressHUDStyle.swift in Sources */,
+				50DB470721A267050062F6A5 /* JSBarProgressView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -321,7 +341,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -347,7 +367,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.sibo.jian.JSProgressHUD;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
