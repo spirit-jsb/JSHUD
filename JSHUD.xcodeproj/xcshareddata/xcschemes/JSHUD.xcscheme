@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "50DB46AE21A24A620062F6A5"
-               BuildableName = "JSProgressHUD.framework"
-               BlueprintName = "JSProgressHUD"
-               ReferencedContainer = "container:JSProgressHUD.xcodeproj">
+               BuildableName = "JSHUD.framework"
+               BlueprintName = "JSHUD"
+               ReferencedContainer = "container:JSHUD.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -29,6 +29,15 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "50DB46AE21A24A620062F6A5"
+            BuildableName = "JSProgressHUD.framework"
+            BlueprintName = "JSProgressHUD"
+            ReferencedContainer = "container:JSProgressHUD.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -46,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "50DB46AE21A24A620062F6A5"
-            BuildableName = "JSProgressHUD.framework"
-            BlueprintName = "JSProgressHUD"
-            ReferencedContainer = "container:JSProgressHUD.xcodeproj">
+            BuildableName = "JSHUD.framework"
+            BlueprintName = "JSHUD"
+            ReferencedContainer = "container:JSHUD.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -60,15 +69,6 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "50DB46AE21A24A620062F6A5"
-            BuildableName = "JSProgressHUD.framework"
-            BlueprintName = "JSProgressHUD"
-            ReferencedContainer = "container:JSProgressHUD.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "50DB46AE21A24A620062F6A5"
-            BuildableName = "JSProgressHUD.framework"
-            BlueprintName = "JSProgressHUD"
-            ReferencedContainer = "container:../JSProgressHUD.xcodeproj">
+            BuildableName = "JSHUD.framework"
+            BlueprintName = "JSHUD"
+            ReferencedContainer = "container:../JSHUD.xcodeproj">
          </BuildableReference>
       </CodeCoverageTargets>
       <Testables>
@@ -44,9 +44,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "5000EEE521ACE64E0087903B"
-               BuildableName = "JSProgressHUD-DemoTests.xctest"
-               BlueprintName = "JSProgressHUD-DemoTests"
-               ReferencedContainer = "container:JSProgressHUD-Demo.xcodeproj">
+               BuildableName = "JSHUD-DemoTests.xctest"
+               BlueprintName = "JSHUD-DemoTests"
+               ReferencedContainer = "container:JSHUD-Demo.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -54,9 +54,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "50DB46C221A24A9B0062F6A5"
-            BuildableName = "JSProgressHUD-Demo.app"
-            BlueprintName = "JSProgressHUD-Demo"
-            ReferencedContainer = "container:JSProgressHUD-Demo.xcodeproj">
+            BuildableName = "JSHUD-Demo.app"
+            BlueprintName = "JSHUD-Demo"
+            ReferencedContainer = "container:JSHUD-Demo.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -77,9 +77,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "50DB46C221A24A9B0062F6A5"
-            BuildableName = "JSProgressHUD-Demo.app"
-            BlueprintName = "JSProgressHUD-Demo"
-            ReferencedContainer = "container:JSProgressHUD-Demo.xcodeproj">
+            BuildableName = "JSHUD-Demo.app"
+            BlueprintName = "JSHUD-Demo"
+            ReferencedContainer = "container:JSHUD-Demo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>

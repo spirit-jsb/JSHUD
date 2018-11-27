@@ -1,6 +1,6 @@
 //
 //  JSBackgroundView.swift
-//  JSProgressHUD
+//  JSHUD
 //
 //  Created by Max on 2018/11/19.
 //  Copyright © 2018 Max. All rights reserved.
@@ -11,7 +11,7 @@ import UIKit
 public class JSBackgroundView: UIView {
 
     // MARK: 属性
-    public var backgroundStyle: JSProgressHUDBackgroundStyle = .blur {
+    public var backgroundStyle: JSHUDBackgroundStyle = .blur {
         didSet {
             if self.backgroundStyle != oldValue {
                 self.resetBackgroundStyle()

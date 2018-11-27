@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
     一个简便易用的自定义 Progress HUD 框架，方便快捷的定制 HUD。
                          DESC
   
-    s.homepage         = 'https://github.com/spirit-jsb/JSProgressHUD'
+    s.homepage         = 'https://github.com/spirit-jsb/JSHUD'
   
     s.license          = { :type => 'MIT', :file => 'LICENSE' }
   
@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
   
     s.ios.deployment_target = '9.0'
   
-    s.source           = { :git => 'https://github.com/spirit-jsb/JSProgressHUD.git', :tag => s.version.to_s }
+    s.source           = { :git => 'https://github.com/spirit-jsb/JSHUD.git', :tag => s.version.to_s }
     
     s.source_files = 'Sources/**/*.swift'
     

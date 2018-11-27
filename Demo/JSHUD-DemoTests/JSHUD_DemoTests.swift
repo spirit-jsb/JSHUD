@@ -1,15 +1,15 @@
 //
-//  JSProgressHUD_DemoTests.swift
-//  JSProgressHUD-DemoTests
+//  JSHUD_DemoTests.swift
+//  JSHUD-DemoTests
 //
 //  Created by Max on 2018/11/27.
 //  Copyright © 2018 Max. All rights reserved.
 //
 
 import XCTest
-import JSProgressHUD
+import JSHUD
 
-class JSProgressHUD_DemoTests: XCTestCase, JSProgressHUDDelegate {
+class JSHUD_DemoTests: XCTestCase, JSHUDDelegate {
 
     // MARK: 属性
     var hide_expectation: XCTestExpectation?
@@ -26,16 +26,16 @@ class JSProgressHUD_DemoTests: XCTestCase, JSProgressHUDDelegate {
     
     // MAKR: 测试方法
     func test_initialize() {
-        XCTAssertNotNil(JSProgressHUD(with: UIView()))
-        XCTAssertNotNil(JSProgressHUD(frame: .zero))
-        XCTAssertNotNil(JSProgressHUD(with: nil))
+        XCTAssertNotNil(JSHUD(with: UIView()))
+        XCTAssertNotNil(JSHUD(frame: .zero))
+        XCTAssertNotNil(JSHUD(with: nil))
     }
     
     func test_non_animated_convenience_hud_presentation() {
         let root_view_controller = UIApplication.shared.keyWindow?.rootViewController
         let root_view = root_view_controller?.view
         
-        let hud = JSProgressHUD.showHUD(addTo: root_view, animated: false)
+        let hud = JSHUD.showHUD(addTo: root_view, animated: false)
         
         XCTAssertNotNil(hud, "A HUD should be created.")
         
@@ -43,12 +43,12 @@ class JSProgressHUD_DemoTests: XCTestCase, JSProgressHUDDelegate {
         
         XCTAssertFalse(hud.bezelView.layer.animationKeys()?.contains("opacity") ?? false, "The opacity should NOT be animated.")
         
-        XCTAssertEqual(JSProgressHUD.HUD(for: root_view), hud, "The HUD should be found via the convenience operation.")
+        XCTAssertEqual(JSHUD.HUD(for: root_view), hud, "The HUD should be found via the convenience operation.")
         
-        XCTAssertTrue(JSProgressHUD.hideHUD(for: root_view, animated: false), "The HUD should be found and removed.")
+        XCTAssertTrue(JSHUD.hideHUD(for: root_view, animated: false), "The HUD should be found and removed.")
         js_hud_was_hidden_and_remove(hud, root_view: root_view!)
         
-        XCTAssertFalse(JSProgressHUD.hideHUD(for: root_view, animated: false), "A subsequent HUD hide operation should fail.")
+        XCTAssertFalse(JSHUD.hideHUD(for: root_view, animated: false), "A subsequent HUD hide operation should fail.")
     }
     
     func test_animated_convenience_hud_presentation() {
@@ -57,7 +57,7 @@ class JSProgressHUD_DemoTests: XCTestCase, JSProgressHUDDelegate {
         
         self.hide_expectation = self.expectation(description: "The hudWasHidden: delegate should have been called.")
         
-        let hud = JSProgressHUD.showHUD(addTo: root_view, animated: true)
+        let hud = JSHUD.showHUD(addTo: root_view, animated: true)
         hud.delegate = self
         
         XCTAssertNotNil(hud, "A HUD should be created.")
@@ -66,9 +66,9 @@ class JSProgressHUD_DemoTests: XCTestCase, JSProgressHUDDelegate {
         
         XCTAssertTrue(hud.bezelView.layer.animationKeys()?.contains("opacity") ?? false, "The opacity should be animated.")
         
-        XCTAssertEqual(JSProgressHUD.HUD(for: root_view), hud, "The HUD should be found via the convenience operation.")
+        XCTAssertEqual(JSHUD.HUD(for: root_view), hud, "The HUD should be found via the convenience operation.")
         
-        XCTAssertTrue(JSProgressHUD.hideHUD(for: root_view, animated: true), "The HUD should be found and removed.")
+        XCTAssertTrue(JSHUD.hideHUD(for: root_view, animated: true), "The HUD should be found and removed.")
         
         XCTAssertTrue(root_view?.subviews.contains(hud) ?? false, "The HUD should still be part of the view hierarchy.")
         XCTAssertEqual(hud.alpha, 1.0, "The hud should still be visible.")
@@ -78,7 +78,7 @@ class JSProgressHUD_DemoTests: XCTestCase, JSProgressHUDDelegate {
         
         self.hide_handle = {
             self.js_hud_was_hidden_and_remove(hud, root_view: root_view!)
-            XCTAssertFalse(JSProgressHUD.hideHUD(for: root_view, animated: true), "A subsequent HUD hide operation should fail.")
+            XCTAssertFalse(JSHUD.hideHUD(for: root_view, animated: true), "A subsequent HUD hide operation should fail.")
         }
         
         self.waitForExpectations(timeout: 5.0, handler: nil)
@@ -91,7 +91,7 @@ class JSProgressHUD_DemoTests: XCTestCase, JSProgressHUDDelegate {
         self.hide_expectation = self.expectation(description: "The hudWasHidden: delegate should have been called.")
         let completion_expectation = self.expectation(description: "The completionBlock: should have been called.")
         
-        let hud = JSProgressHUD.showHUD(addTo: root_view, animated: true)
+        let hud = JSHUD.showHUD(addTo: root_view, animated: true)
         hud.delegate = self
         hud.completionHandle = {
             completion_expectation.fulfill()
@@ -105,7 +105,7 @@ class JSProgressHUD_DemoTests: XCTestCase, JSProgressHUDDelegate {
         let root_view_controller = UIApplication.shared.keyWindow?.rootViewController
         let root_view = root_view_controller?.view
         
-        let hud = JSProgressHUD(with: root_view)
+        let hud = JSHUD(with: root_view)
         hud.mode = .barProgress
         root_view?.addSubview(hud)
         hud.showAnimated(false)
@@ -114,7 +114,7 @@ class JSProgressHUD_DemoTests: XCTestCase, JSProgressHUDDelegate {
     
         XCTAssertNotNil(self.js_helper(hud, first_subview_class: JSBarProgressView.self))
         
-        XCTAssertTrue(JSProgressHUD.hideHUD(for: root_view, animated: false), "The HUD should be found and removed.")
+        XCTAssertTrue(JSHUD.hideHUD(for: root_view, animated: false), "The HUD should be found and removed.")
         
         js_hud_was_hidden_and_remove(hud, root_view: root_view!)
     }
@@ -123,7 +123,7 @@ class JSProgressHUD_DemoTests: XCTestCase, JSProgressHUDDelegate {
         let root_view_controller = UIApplication.shared.keyWindow?.rootViewController
         let root_view = root_view_controller?.view
         
-        let hud = JSProgressHUD(with: root_view)
+        let hud = JSHUD(with: root_view)
         hud.mode = .ringProgress
         root_view?.addSubview(hud)
         hud.showAnimated(false)
@@ -132,7 +132,7 @@ class JSProgressHUD_DemoTests: XCTestCase, JSProgressHUDDelegate {
         
         XCTAssertNotNil(self.js_helper(hud, first_subview_class: JSRingProgressView.self))
         
-        XCTAssertTrue(JSProgressHUD.hideHUD(for: root_view, animated: false), "The HUD should be found and removed.")
+        XCTAssertTrue(JSHUD.hideHUD(for: root_view, animated: false), "The HUD should be found and removed.")
         
         js_hud_was_hidden_and_remove(hud, root_view: root_view!)
     }
@@ -141,7 +141,7 @@ class JSProgressHUD_DemoTests: XCTestCase, JSProgressHUDDelegate {
         let root_view_controller = UIApplication.shared.keyWindow?.rootViewController
         let root_view = root_view_controller?.view
         
-        let hud = JSProgressHUD(with: root_view)
+        let hud = JSHUD(with: root_view)
         hud.mode = .sectorProgress
         root_view?.addSubview(hud)
         hud.showAnimated(false)
@@ -150,7 +150,7 @@ class JSProgressHUD_DemoTests: XCTestCase, JSProgressHUDDelegate {
         
         XCTAssertNotNil(self.js_helper(hud, first_subview_class: JSSectorProgressView.self))
         
-        XCTAssertTrue(JSProgressHUD.hideHUD(for: root_view, animated: false), "The HUD should be found and removed.")
+        XCTAssertTrue(JSHUD.hideHUD(for: root_view, animated: false), "The HUD should be found and removed.")
         
         js_hud_was_hidden_and_remove(hud, root_view: root_view!)
     }
@@ -159,7 +159,7 @@ class JSProgressHUD_DemoTests: XCTestCase, JSProgressHUDDelegate {
         let root_view_controller = UIApplication.shared.keyWindow?.rootViewController
         let root_view = root_view_controller?.view
         
-        let hud = JSProgressHUD(with: root_view)
+        let hud = JSHUD(with: root_view)
         
         for (index, view) in hud.bezelView.subviews.enumerated() {
             XCTAssert(!view.isKind(of: UIVisualEffectView.self) || index == 0, "Just the first subview should be a visual effect view.")
@@ -178,7 +178,7 @@ class JSProgressHUD_DemoTests: XCTestCase, JSProgressHUDDelegate {
         
         self.hide_expectation = self.expectation(description: "The hudWasHidden: delegate should have been called.")
         
-        let hud = JSProgressHUD.showHUD(addTo: root_view, animated: true)
+        let hud = JSHUD.showHUD(addTo: root_view, animated: true)
         hud.delegate = self
         
         XCTAssertNotNil(hud, "A HUD should be created.")
@@ -207,7 +207,7 @@ class JSProgressHUD_DemoTests: XCTestCase, JSProgressHUDDelegate {
         let root_view_controller = UIApplication.shared.keyWindow?.rootViewController
         let root_view = root_view_controller?.view
         
-        let hud = JSProgressHUD(with: root_view)
+        let hud = JSHUD(with: root_view)
         root_view?.addSubview(hud)
         
         hud.showAnimated(true)
@@ -237,7 +237,7 @@ class JSProgressHUD_DemoTests: XCTestCase, JSProgressHUDDelegate {
         let root_view_controller = UIApplication.shared.keyWindow?.rootViewController
         let root_view = root_view_controller?.view
         
-        let hud = JSProgressHUD(with: root_view)
+        let hud = JSHUD(with: root_view)
         root_view?.addSubview(hud)
         hud.showAnimated(false)
         
@@ -259,7 +259,7 @@ class JSProgressHUD_DemoTests: XCTestCase, JSProgressHUDDelegate {
         let root_view_controller = UIApplication.shared.keyWindow?.rootViewController
         let root_view = root_view_controller?.view
         
-        let hud = JSProgressHUD.showHUD(addTo: root_view, animated: false)
+        let hud = JSHUD.showHUD(addTo: root_view, animated: false)
         
         hud.hideAnimated(true)
         
@@ -284,7 +284,7 @@ class JSProgressHUD_DemoTests: XCTestCase, JSProgressHUDDelegate {
         
         let hide_expectation = self.expectation(description: "The hud should have been hidden.")
         
-        let hud = JSProgressHUD(with: root_view)
+        let hud = JSHUD(with: root_view)
         root_view?.addSubview(hud)
         hud.showAnimated(true)
 
@@ -313,7 +313,7 @@ class JSProgressHUD_DemoTests: XCTestCase, JSProgressHUDDelegate {
         
         self.hide_expectation = self.expectation(description: "The hudWasHidden: delegate should have been called.")
         
-        let hud = JSProgressHUD(with: root_view)
+        let hud = JSHUD(with: root_view)
         hud.delegate = self
         hud.removeFromSuperViewWhenHide = true
         hud.minShowTime = 2.0
@@ -346,7 +346,7 @@ class JSProgressHUD_DemoTests: XCTestCase, JSProgressHUDDelegate {
         
         self.hide_expectation = self.expectation(description: "The hudWasHidden: delegate should have been called.")
         
-        let hud = JSProgressHUD(with: root_view)
+        let hud = JSHUD(with: root_view)
         hud.delegate = self
         hud.removeFromSuperViewWhenHide = true
         hud.graceTime = 2.0
@@ -380,7 +380,7 @@ class JSProgressHUD_DemoTests: XCTestCase, JSProgressHUDDelegate {
         
         self.hide_expectation = self.expectation(description: "The hudWasHidden: delegate should have been called.")
         
-        let hud = JSProgressHUD(with: root_view)
+        let hud = JSHUD(with: root_view)
         hud.delegate = self
         hud.removeFromSuperViewWhenHide = true
         hud.graceTime = 2.0
@@ -412,7 +412,7 @@ class JSProgressHUD_DemoTests: XCTestCase, JSProgressHUDDelegate {
     }
     
     // MARK: 私有方法
-    private func js_hud_was_visible(_ hud: JSProgressHUD, root_view: UIView) {
+    private func js_hud_was_visible(_ hud: JSHUD, root_view: UIView) {
         repeat {
             XCTAssertEqual(hud.superview, root_view, "The hud should be added to the view.")
             XCTAssertEqual(hud.alpha, 1.0, "The HUD should be visible.")
@@ -420,14 +420,14 @@ class JSProgressHUD_DemoTests: XCTestCase, JSProgressHUDDelegate {
         while false
     }
     
-    private func js_hud_was_hidden(_ hud: JSProgressHUD) {
+    private func js_hud_was_hidden(_ hud: JSHUD) {
         repeat {
             XCTAssertEqual(hud.alpha, 0.0, "The hud should be faded out.")
         }
         while false
     }
     
-    private func js_hud_was_hidden_and_remove(_ hud: JSProgressHUD, root_view: UIView) {
+    private func js_hud_was_hidden_and_remove(_ hud: JSHUD, root_view: UIView) {
         repeat {
             XCTAssertFalse(root_view.subviews.contains(hud), "The HUD should not be part of the view hierarchy.")
             XCTAssertNil(hud.superview, "The HUD should not have a superview.")
@@ -455,8 +455,8 @@ class JSProgressHUD_DemoTests: XCTestCase, JSProgressHUDDelegate {
         return this_view
     }
     
-    // MARK: JSProgressHUDDelegate
-    func hudWasHidden(_ hud: JSProgressHUD) {
+    // MARK: JSHUDDelegate
+    func hudWasHidden(_ hud: JSHUD) {
         if let _hide_handle = self.hide_handle {
             _hide_handle()
         }
