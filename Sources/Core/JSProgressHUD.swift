@@ -139,10 +139,7 @@ public class JSProgressHUD: UIView {
     
     // MARK: 初始化
     public convenience init(with view: UIView?) {
-        guard let _view = view else {
-            fatalError("视图不能为 nil")
-        }
-        self.init(frame: _view.bounds)
+        self.init(frame: view?.bounds ?? .zero)
     }
     
     public override init(frame: CGRect) {
@@ -244,15 +241,15 @@ public class JSProgressHUD: UIView {
     }
     
     // MARK: 公开方法
-    public class func showHUD(addTo view: UIView, animated: Bool) -> JSProgressHUD {
+    public class func showHUD(addTo view: UIView?, animated: Bool) -> JSProgressHUD {
         let hud = JSProgressHUD(with: view)
         hud.removeFromSuperViewWhenHide = true
-        view.addSubview(hud)
+        view?.addSubview(hud)
         hud.showAnimated(animated)
         return hud
     }
     
-    public class func hideHUD(for view: UIView, animated: Bool) -> Bool {
+    public class func hideHUD(for view: UIView?, animated: Bool) -> Bool {
         let hud = self.HUD(for: view)
         if let _hud = hud {
             _hud.removeFromSuperViewWhenHide = true
@@ -262,8 +259,11 @@ public class JSProgressHUD: UIView {
         return false
     }
     
-    public class func HUD(for view: UIView) -> JSProgressHUD? {
-        for subview in view.subviews.reversed() {
+    public class func HUD(for view: UIView?) -> JSProgressHUD? {
+        guard let _view = view else {
+            return nil
+        }
+        for subview in _view.subviews.reversed() {
             if subview.isKind(of: self) {
                 let hud = subview as! JSProgressHUD
                 if hud.hasFinished == false {
