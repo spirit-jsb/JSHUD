@@ -8,10 +8,10 @@
 
 import UIKit
 
-public class JSBarProgressView: UIView {
+class JSBarProgressView: UIView {
 
     // MARK: 属性
-    @objc public var progress: Float = 0.0 {
+    @objc var progress: Float = 0.0 {
         willSet {
             if newValue < 0.0 || newValue > 1.0 {
                 return
@@ -20,7 +20,7 @@ public class JSBarProgressView: UIView {
         }
     }
     
-    @objc public dynamic var progressTintColor: UIColor! = UIColor.white {
+    @objc dynamic var progressTintColor: UIColor! = UIColor.white {
         didSet {
             if self.progressTintColor != oldValue {
                 self.setNeedsDisplay()
@@ -28,7 +28,7 @@ public class JSBarProgressView: UIView {
         }
     }
     
-    @objc public dynamic var trackTintColor: UIColor! = UIColor.clear {
+    @objc dynamic var trackTintColor: UIColor! = UIColor.clear {
         didSet {
             if self.trackTintColor != oldValue {
                 self.setNeedsDisplay()
@@ -41,7 +41,7 @@ public class JSBarProgressView: UIView {
         self.init(frame: CGRect(x: 0.0, y: 0.0, width: 120.0, height: 20.0))
     }
 
-    public override init(frame: CGRect) {
+    override init(frame: CGRect) {
         super.init(frame: frame)
         self.setupView()
     }
@@ -57,11 +57,11 @@ public class JSBarProgressView: UIView {
     }
 
     // MARK: 重写父类方法
-    public override var intrinsicContentSize: CGSize {
+    override var intrinsicContentSize: CGSize {
         return CGSize(width: 120.0, height: 10.0)
     }
     
-    public override func draw(_ rect: CGRect) {
+    override func draw(_ rect: CGRect) {
         let content = UIGraphicsGetCurrentContext()
         
         let width = rect.width
