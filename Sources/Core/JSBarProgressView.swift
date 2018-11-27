@@ -8,7 +8,7 @@
 
 import UIKit
 
-class JSBarProgressView: UIView {
+public class JSBarProgressView: UIView {
 
     // MARK: 属性
     @objc var progress: Float = 0.0 {
@@ -57,11 +57,11 @@ class JSBarProgressView: UIView {
     }
 
     // MARK: 重写父类方法
-    override var intrinsicContentSize: CGSize {
+    public override var intrinsicContentSize: CGSize {
         return CGSize(width: 120.0, height: 10.0)
     }
     
-    override func draw(_ rect: CGRect) {
+    public override func draw(_ rect: CGRect) {
         let content = UIGraphicsGetCurrentContext()
         
         let width = rect.width

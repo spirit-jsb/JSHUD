@@ -8,7 +8,7 @@
 
 import UIKit
 
-class JSRingProgressView: UIView {
+public class JSRingProgressView: UIView {
 
     // MARK: 属性
     @objc var progress: Float = 0.0 {
@@ -57,11 +57,11 @@ class JSRingProgressView: UIView {
     }
     
     // MARK: 重写父类方法
-    override var intrinsicContentSize: CGSize {
+    public override var intrinsicContentSize: CGSize {
         return CGSize(width: 40.0, height: 40.0)
     }
     
-    override func draw(_ rect: CGRect) {
+    public override func draw(_ rect: CGRect) {
         let context = UIGraphicsGetCurrentContext()
 
         let lineWidth: CGFloat = 2.0
