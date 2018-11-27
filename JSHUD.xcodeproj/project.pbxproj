@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		50DB46B421A24A620062F6A5 /* JSProgressHUD.h in Headers */ = {isa = PBXBuildFile; fileRef = 50DB46B221A24A620062F6A5 /* JSProgressHUD.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		50DB46B421A24A620062F6A5 /* JSHUD.h in Headers */ = {isa = PBXBuildFile; fileRef = 50DB46B221A24A620062F6A5 /* JSHUD.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		50DB46FB21A24C6F0062F6A5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50DB46FA21A24C6F0062F6A5 /* UIKit.framework */; };
 		50DB46FD21A24C750062F6A5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50DB46FC21A24C750062F6A5 /* Foundation.framework */; };
 		50DB46FF21A24ED40062F6A5 /* JSBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50DB46FE21A24ED40062F6A5 /* JSBackgroundView.swift */; };
@@ -22,8 +22,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		50DB46AF21A24A620062F6A5 /* JSProgressHUD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JSProgressHUD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		50DB46B221A24A620062F6A5 /* JSProgressHUD.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSProgressHUD.h; sourceTree = "<group>"; };
+		50DB46AF21A24A620062F6A5 /* JSHUD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JSHUD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		50DB46B221A24A620062F6A5 /* JSHUD.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSHUD.h; sourceTree = "<group>"; };
 		50DB46B321A24A620062F6A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		50DB46FA21A24C6F0062F6A5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		50DB46FC21A24C750062F6A5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -65,7 +65,7 @@
 		50DB46B021A24A620062F6A5 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				50DB46AF21A24A620062F6A5 /* JSProgressHUD.framework */,
+				50DB46AF21A24A620062F6A5 /* JSHUD.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -74,7 +74,7 @@
 			isa = PBXGroup;
 			children = (
 				50DB46F821A24C3C0062F6A5 /* Core */,
-				50DB46B221A24A620062F6A5 /* JSProgressHUD.h */,
+				50DB46B221A24A620062F6A5 /* JSHUD.h */,
 				50DB46B321A24A620062F6A5 /* Info.plist */,
 			);
 			path = Sources;
@@ -112,16 +112,16 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				50DB46B421A24A620062F6A5 /* JSProgressHUD.h in Headers */,
+				50DB46B421A24A620062F6A5 /* JSHUD.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		50DB46AE21A24A620062F6A5 /* JSProgressHUD */ = {
+		50DB46AE21A24A620062F6A5 /* JSHUD */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 50DB46B721A24A620062F6A5 /* Build configuration list for PBXNativeTarget "JSProgressHUD" */;
+			buildConfigurationList = 50DB46B721A24A620062F6A5 /* Build configuration list for PBXNativeTarget "JSHUD" */;
 			buildPhases = (
 				50DB46AA21A24A620062F6A5 /* Headers */,
 				50DB46AB21A24A620062F6A5 /* Sources */,
@@ -132,9 +132,9 @@
 			);
 			dependencies = (
 			);
-			name = JSProgressHUD;
+			name = JSHUD;
 			productName = JSProgressHUD;
-			productReference = 50DB46AF21A24A620062F6A5 /* JSProgressHUD.framework */;
+			productReference = 50DB46AF21A24A620062F6A5 /* JSHUD.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -152,7 +152,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 50DB46A921A24A620062F6A5 /* Build configuration list for PBXProject "JSProgressHUD" */;
+			buildConfigurationList = 50DB46A921A24A620062F6A5 /* Build configuration list for PBXProject "JSHUD" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -164,7 +164,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				50DB46AE21A24A620062F6A5 /* JSProgressHUD */,
+				50DB46AE21A24A620062F6A5 /* JSHUD */,
 			);
 		};
 /* End PBXProject section */
@@ -337,7 +337,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.sibo.jian.JSProgressHUD;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sibo.jian.JSHUD;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -364,7 +364,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.sibo.jian.JSProgressHUD;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sibo.jian.JSHUD;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
@@ -375,7 +375,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		50DB46A921A24A620062F6A5 /* Build configuration list for PBXProject "JSProgressHUD" */ = {
+		50DB46A921A24A620062F6A5 /* Build configuration list for PBXProject "JSHUD" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				50DB46B521A24A620062F6A5 /* Debug */,
@@ -384,7 +384,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		50DB46B721A24A620062F6A5 /* Build configuration list for PBXNativeTarget "JSProgressHUD" */ = {
+		50DB46B721A24A620062F6A5 /* Build configuration list for PBXNativeTarget "JSHUD" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				50DB46B821A24A620062F6A5 /* Debug */,

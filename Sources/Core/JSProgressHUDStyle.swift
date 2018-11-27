@@ -1,6 +1,6 @@
 //
-//  JSProgressHUDStyle.swift
-//  JSProgressHUD
+//  JSHUDStyle.swift
+//  JSHUD
 //
 //  Created by Max on 2018/11/19.
 //  Copyright © 2018 Max. All rights reserved.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum JSProgressHUDMode {
+public enum JSHUDMode {
     case loading
     case barProgress
     case ringProgress
@@ -17,14 +17,14 @@ public enum JSProgressHUDMode {
     case text
 }
 
-public enum JSProgressHUDAnimation {
+public enum JSHUDAnimation {
     case fade
     case zoom
     case zoomOut
     case zoomIn
 }
 
-public enum JSProgressHUDBackgroundStyle {
+public enum JSHUDBackgroundStyle {
     case solidColor
     case blur
 }

@@ -1,13 +1,13 @@
 //
 //  ViewController.swift
-//  JSProgressHUD-Demo
+//  JSHUD-Demo
 //
 //  Created by Max on 2018/11/19.
 //  Copyright © 2018 Max. All rights reserved.
 //
 
 import UIKit
-import JSProgressHUD
+import JSHUD
 
 struct JSExample {
     let title: String
@@ -19,7 +19,7 @@ struct JSExample {
     }
 }
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, URLSessionDownloadDelegate, JSProgressHUDDelegate {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, URLSessionDownloadDelegate, JSHUDDelegate {
     
     // MARK: 属性
     var examples: [[JSExample]] = [[JSExample(withTitle: "Loading Example", selector: #selector(loadingExample)),
@@ -50,7 +50,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     // MARK: Example
     @objc private func loadingExample() {
-        let hud = JSProgressHUD.showHUD(addTo: self.navigationController!.view, animated: true)
+        let hud = JSHUD.showHUD(addTo: self.navigationController!.view, animated: true)
         DispatchQueue.global().async {
             self.doSomeWork()
             DispatchQueue.main.async {
@@ -60,7 +60,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     @objc private func labelExample() {
-        let hud = JSProgressHUD.showHUD(addTo: self.navigationController!.view, animated: true)
+        let hud = JSHUD.showHUD(addTo: self.navigationController!.view, animated: true)
         hud.label.text = "Loading..."
         DispatchQueue.global().async {
             self.doSomeWork()
@@ -71,7 +71,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     @objc private func detailsLabelExample() {
-        let hud = JSProgressHUD.showHUD(addTo: self.navigationController!.view, animated: true)
+        let hud = JSHUD.showHUD(addTo: self.navigationController!.view, animated: true)
         hud.label.text = "Loading..."
         hud.detailsLabel.text = "Parsing data\n(1/1)"
         DispatchQueue.global().async {
@@ -83,7 +83,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     @objc private func barExample() {
-        let hud = JSProgressHUD.showHUD(addTo: self.navigationController!.view, animated: true)
+        let hud = JSHUD.showHUD(addTo: self.navigationController!.view, animated: true)
         hud.mode = .barProgress
         hud.label.text = "Loading..."
         DispatchQueue.global().async {
@@ -95,7 +95,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     @objc private func ringExample() {
-        let hud = JSProgressHUD.showHUD(addTo: self.navigationController!.view, animated: true)
+        let hud = JSHUD.showHUD(addTo: self.navigationController!.view, animated: true)
         hud.mode = .ringProgress
         hud.label.text = "Loading..."
         hud.detailsLabel.text = "Parsing data\n(1/1)"
@@ -108,7 +108,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     @objc private func sectorExample() {
-        let hud = JSProgressHUD.showHUD(addTo: self.navigationController!.view, animated: true)
+        let hud = JSHUD.showHUD(addTo: self.navigationController!.view, animated: true)
         hud.mode = .sectorProgress
         hud.label.text = "Loading..."
         DispatchQueue.global().async {
@@ -120,7 +120,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     @objc private func barProgressExample() {
-        let hud = JSProgressHUD.showHUD(addTo: self.navigationController!.view, animated: true)
+        let hud = JSHUD.showHUD(addTo: self.navigationController!.view, animated: true)
         hud.mode = .barProgress
         hud.label.text = "Loading..."
         
@@ -136,7 +136,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     @objc private func ringProgressExample() {
-        let hud = JSProgressHUD.showHUD(addTo: self.navigationController!.view, animated: true)
+        let hud = JSHUD.showHUD(addTo: self.navigationController!.view, animated: true)
         hud.mode = .ringProgress
         hud.label.text = "Loading..."
         hud.detailsLabel.text = "Parsing data\n(1/1)"
@@ -153,7 +153,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     @objc private func sectorProgressExample() {
-        let hud = JSProgressHUD.showHUD(addTo: self.navigationController!.view, animated: true)
+        let hud = JSHUD.showHUD(addTo: self.navigationController!.view, animated: true)
         hud.mode = .sectorProgress
         hud.label.text = "Loading..."
         
@@ -169,17 +169,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     @objc private func textExample() {
-        let hud = JSProgressHUD.showHUD(addTo: self.navigationController!.view, animated: true)
+        let hud = JSHUD.showHUD(addTo: self.navigationController!.view, animated: true)
         hud.mode = .text
         hud.label.text = "Message here!"
         
-        hud.offset = CGPoint(x: 0.0, y: JSProgressHUD.JSProgressMaxOffset)
+        hud.offset = CGPoint(x: 0.0, y: JSHUD.JSProgressMaxOffset)
         
         hud.hideAnimated(true, afterDelay: 3.0)
     }
     
     @objc private func customExample() {
-        let hud = JSProgressHUD.showHUD(addTo: self.navigationController!.view, animated: true)
+        let hud = JSHUD.showHUD(addTo: self.navigationController!.view, animated: true)
         hud.mode = .custom
         hud.label.text = "Success here!"
         
@@ -190,7 +190,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     @objc private func modeSwitchingExample() {
-        let hud = JSProgressHUD.showHUD(addTo: self.navigationController!.view, animated: true)
+        let hud = JSHUD.showHUD(addTo: self.navigationController!.view, animated: true)
         
         hud.tag = 1
         hud.delegate = self
@@ -206,7 +206,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     @objc private func windowExample() {
-        let hud = JSProgressHUD.showHUD(addTo: self.view.window!, animated: true)
+        let hud = JSHUD.showHUD(addTo: self.view.window!, animated: true)
         DispatchQueue.global().async {
             self.doSomeWork()
             DispatchQueue.main.async {
@@ -216,7 +216,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     @objc private func networkingExample() {
-        let hud = JSProgressHUD.showHUD(addTo: self.navigationController!.view, animated: true)
+        let hud = JSHUD.showHUD(addTo: self.navigationController!.view, animated: true)
         hud.label.text = "Preparing..."
         hud.minSize = CGSize(width: 150.0, height: 100.0)
         
@@ -224,7 +224,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     @objc private func solidBackgroundColor() {
-        let hud = JSProgressHUD.showHUD(addTo: self.navigationController!.view, animated: true)
+        let hud = JSHUD.showHUD(addTo: self.navigationController!.view, animated: true)
         
         hud.backgroundView.backgroundStyle = .solidColor
         hud.backgroundView.color = UIColor.red.withAlphaComponent(0.1)
@@ -238,7 +238,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     @objc private func contentColorExample() {
-        let hud = JSProgressHUD.showHUD(addTo: self.navigationController!.view, animated: true)
+        let hud = JSHUD.showHUD(addTo: self.navigationController!.view, animated: true)
         hud.contentColor = UIColor(red: 0.0, green: 0.6, blue: 0.7, alpha: 1.0)
         
         hud.label.text = "Loading..."
@@ -261,7 +261,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         while progress < 1.0 {
             progress = progress + 0.01
             DispatchQueue.main.async {
-                JSProgressHUD.HUD(for: self.navigationController!.view)?.progress = progress
+                JSHUD.HUD(for: self.navigationController!.view)?.progress = progress
             }
             usleep(50000)
         }
@@ -275,7 +275,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
-    private func doSomeWorkWithMixedProgress(_ hud: JSProgressHUD) {
+    private func doSomeWorkWithMixedProgress(_ hud: JSHUD) {
         sleep(2)
         
         DispatchQueue.main.async {
@@ -350,7 +350,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // MARK: URLSessionDownloadDelegate
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
         DispatchQueue.main.async {
-            let hud = JSProgressHUD.HUD(for: self.navigationController!.view)
+            let hud = JSHUD.HUD(for: self.navigationController!.view)
             hud?.mode = .custom
             hud?.label.text = "Success here!"
             
@@ -364,14 +364,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
         let progress: Float = Float(totalBytesWritten) / Float(totalBytesExpectedToWrite)
         DispatchQueue.main.async {
-            let hud = JSProgressHUD.HUD(for: self.navigationController!.view)
+            let hud = JSHUD.HUD(for: self.navigationController!.view)
             hud?.mode = .barProgress
             hud?.progress = progress
         }
     }
     
-    // MARK: JSProgressHUDDelegate
-    func hudWasHidden(_ hud: JSProgressHUD) {
+    // MARK: JSHUDDelegate
+    func hudWasHidden(_ hud: JSHUD) {
         print("HUD Tag: \(hud.tag) was Hidden")
     }
 }

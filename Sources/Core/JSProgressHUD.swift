@@ -1,6 +1,6 @@
 //
-//  JSProgressHUD.swift
-//  JSProgressHUD
+//  JSHUD.swift
+//  JSHUD
 //
 //  Created by Max on 2018/11/19.
 //  Copyright © 2018 Max. All rights reserved.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class JSProgressHUD: UIView {
+public class JSHUD: UIView {
     
     static public let JSProgressMaxOffset: CGFloat = CGFloat.greatestFiniteMagnitude
     
@@ -17,11 +17,11 @@ public class JSProgressHUD: UIView {
     static let JSDefaultDetailsLabelFontSize: CGFloat = 12.0
     
     // MARK: 属性
-    public typealias JSProgressHUDCompletionHandle = () -> Void
+    public typealias JSHUDCompletionHandle = () -> Void
     
-    public weak var delegate: JSProgressHUDDelegate?
+    public weak var delegate: JSHUDDelegate?
     
-    public var completionHandle: JSProgressHUDCompletionHandle?
+    public var completionHandle: JSHUDCompletionHandle?
     
     public var graceTime: TimeInterval = 0.0
     
@@ -29,7 +29,7 @@ public class JSProgressHUD: UIView {
     
     public var removeFromSuperViewWhenHide: Bool = false
     
-    public var mode: JSProgressHUDMode = .loading {
+    public var mode: JSHUDMode = .loading {
         didSet {
             if self.mode != oldValue {
                 self.updateIndicators()
@@ -37,7 +37,7 @@ public class JSProgressHUD: UIView {
         }
     }
     
-    public var animation: JSProgressHUDAnimation = .fade
+    public var animation: JSHUDAnimation = .fade
     
     public var contentColor: UIColor = UIColor(white: 0.0, alpha: 0.7) {
         didSet {
@@ -241,8 +241,8 @@ public class JSProgressHUD: UIView {
     }
     
     // MARK: 公开方法
-    public class func showHUD(addTo view: UIView?, animated: Bool) -> JSProgressHUD {
-        let hud = JSProgressHUD(with: view)
+    public class func showHUD(addTo view: UIView?, animated: Bool) -> JSHUD {
+        let hud = JSHUD(with: view)
         hud.removeFromSuperViewWhenHide = true
         view?.addSubview(hud)
         hud.showAnimated(animated)
@@ -259,13 +259,13 @@ public class JSProgressHUD: UIView {
         return false
     }
     
-    public class func HUD(for view: UIView?) -> JSProgressHUD? {
+    public class func HUD(for view: UIView?) -> JSHUD? {
         guard let _view = view else {
             return nil
         }
         for subview in _view.subviews.reversed() {
             if subview.isKind(of: self) {
-                let hud = subview as! JSProgressHUD
+                let hud = subview as! JSHUD
                 if hud.hasFinished == false {
                     return hud
                 }
@@ -275,7 +275,7 @@ public class JSProgressHUD: UIView {
     }
     
     public func showAnimated(_ animated: Bool) {
-        assert(Thread.isMainThread, "请在主线程上访问 JSProgressHUD")
+        assert(Thread.isMainThread, "请在主线程上访问 JSHUD")
         
         self.minShowTimer?.invalidate()
         
@@ -293,7 +293,7 @@ public class JSProgressHUD: UIView {
     }
     
     public func hideAnimated(_ animated: Bool) {
-        assert(Thread.isMainThread, "请在主线程上访问 JSProgressHUD")
+        assert(Thread.isMainThread, "请在主线程上访问 JSHUD")
         
         self.graceTimer?.invalidate()
         
@@ -355,7 +355,7 @@ public class JSProgressHUD: UIView {
         self.label.adjustsFontSizeToFitWidth = false
         self.label.textAlignment = .center
         self.label.textColor = self.contentColor
-        self.label.font = UIFont.boldSystemFont(ofSize: JSProgressHUD.JSDefaultLabelFontSize)
+        self.label.font = UIFont.boldSystemFont(ofSize: JSHUD.JSDefaultLabelFontSize)
         
         self.label.translatesAutoresizingMaskIntoConstraints = false
         self.label.setContentCompressionResistancePriority(UILayoutPriority(998.0), for: .horizontal)
@@ -370,7 +370,7 @@ public class JSProgressHUD: UIView {
         self.detailsLabel.textAlignment = .center
         self.detailsLabel.textColor = self.contentColor
         self.detailsLabel.numberOfLines = 0
-        self.detailsLabel.font = UIFont.boldSystemFont(ofSize: JSProgressHUD.JSDefaultDetailsLabelFontSize)
+        self.detailsLabel.font = UIFont.boldSystemFont(ofSize: JSHUD.JSDefaultDetailsLabelFontSize)
         
         self.detailsLabel.translatesAutoresizingMaskIntoConstraints = false
         self.detailsLabel.setContentCompressionResistancePriority(UILayoutPriority(998.0), for: .horizontal)
@@ -443,12 +443,12 @@ public class JSProgressHUD: UIView {
             _completionHandle()
         }
         
-        if self.delegate?.responds(to: #selector(JSProgressHUDDelegate.hudWasHidden(_:))) ?? false {
-            self.delegate?.perform(#selector(JSProgressHUDDelegate.hudWasHidden(_:)), with: self)
+        if self.delegate?.responds(to: #selector(JSHUDDelegate.hudWasHidden(_:))) ?? false {
+            self.delegate?.perform(#selector(JSHUDDelegate.hudWasHidden(_:)), with: self)
         }
     }
     
-    private func animate(_ isZoomIn: Bool, withType type: JSProgressHUDAnimation, completionHandle: ((Bool) -> ())? = nil) {
+    private func animate(_ isZoomIn: Bool, withType type: JSHUDAnimation, completionHandle: ((Bool) -> ())? = nil) {
         var animationType = type
         
         if animationType == .zoom {
@@ -547,13 +547,13 @@ public class JSProgressHUD: UIView {
         self.detailsLabel.textColor = self.contentColor
         
         if self.indicatorView?.isKind(of: UIActivityIndicatorView.classForCoder()) ?? false {
-            let appearance = UIActivityIndicatorView.appearance(whenContainedInInstancesOf: [JSProgressHUD.self])
+            let appearance = UIActivityIndicatorView.appearance(whenContainedInInstancesOf: [JSHUD.self])
             if appearance.color == nil {
                 (self.indicatorView as! UIActivityIndicatorView).color = self.contentColor
             }
         }
         else if self.indicatorView?.isKind(of: JSRingProgressView.classForCoder()) ?? false {
-            let appearance = JSRingProgressView.appearance(whenContainedInInstancesOf: [JSProgressHUD.self])
+            let appearance = JSRingProgressView.appearance(whenContainedInInstancesOf: [JSHUD.self])
             if appearance.trackTintColor == nil {
                 (self.indicatorView as! JSRingProgressView).trackTintColor = self.contentColor.withAlphaComponent(0.1)
             }
@@ -562,7 +562,7 @@ public class JSProgressHUD: UIView {
             }
         }
         else if self.indicatorView?.isKind(of: JSBarProgressView.classForCoder()) ?? false {
-            let appearance = JSBarProgressView.appearance(whenContainedInInstancesOf: [JSProgressHUD.self])
+            let appearance = JSBarProgressView.appearance(whenContainedInInstancesOf: [JSHUD.self])
             if appearance.trackTintColor == nil {
                 (self.indicatorView as! JSBarProgressView).trackTintColor = self.contentColor.withAlphaComponent(0.1)
             }
@@ -571,7 +571,7 @@ public class JSProgressHUD: UIView {
             }
         }
         else if self.indicatorView?.isKind(of: JSSectorProgressView.classForCoder()) ?? false {
-            let appearance = JSSectorProgressView.appearance(whenContainedInInstancesOf: [JSProgressHUD.self])
+            let appearance = JSSectorProgressView.appearance(whenContainedInInstancesOf: [JSHUD.self])
             if appearance.trackTintColor == nil {
                 (self.indicatorView as! JSSectorProgressView).trackTintColor = self.contentColor.withAlphaComponent(0.1)
             }
@@ -593,7 +593,7 @@ public class JSProgressHUD: UIView {
             let firstVisible = !(firstPaddingView?.isHidden ?? true) && !(firstPaddingView?.intrinsicContentSize.equalTo(.zero) ?? true)
             let secondVisible = !(secondPaddingView?.isHidden ?? true) && !(secondPaddingView?.intrinsicContentSize.equalTo(.zero) ?? true)
             
-            paddingConstraint.constant = (firstVisible && (secondVisible || hasVisibleAncestors)) ? JSProgressHUD.JSDefaultPadding : 0.0
+            paddingConstraint.constant = (firstVisible && (secondVisible || hasVisibleAncestors)) ? JSHUD.JSDefaultPadding : 0.0
             hasVisibleAncestors = secondVisible || hasVisibleAncestors
         }
     }
