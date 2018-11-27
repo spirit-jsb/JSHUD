@@ -129,7 +129,7 @@ public class JSProgressHUD: UIView {
         didSet {
             if self.progressObjectDisplayLink != oldValue {
                 oldValue?.invalidate()
-                self.progressObjectDisplayLink?.add(to: RunLoop.main, forMode: .default)
+                self.progressObjectDisplayLink?.add(to: RunLoop.main, forMode: .defaultRunLoopMode)
             }
         }
     }
@@ -284,7 +284,7 @@ public class JSProgressHUD: UIView {
         
         if self.graceTime > 0.0 {
             let timer = Timer(timeInterval: self.graceTime, target: self, selector: #selector(handleGraceTimer(_:)), userInfo: nil, repeats: false)
-            RunLoop.current.add(timer, forMode: .common)
+            RunLoop.current.add(timer, forMode: .commonModes)
             self.graceTimer = timer
         }
         else {
@@ -304,7 +304,7 @@ public class JSProgressHUD: UIView {
             let interval = Date().timeIntervalSince(self.showStartDate!)
             if interval < self.minShowTime {
                 let timer = Timer(timeInterval: (self.minShowTime - interval), target: self, selector: #selector(handleMinShowTimer(_:)), userInfo: nil, repeats: false)
-                RunLoop.current.add(timer, forMode: .common)
+                RunLoop.current.add(timer, forMode: .commonModes)
                 self.minShowTimer = timer
                 return
             }
@@ -317,7 +317,7 @@ public class JSProgressHUD: UIView {
         self.hideDelayTimer?.invalidate()
         
         let timer = Timer(timeInterval: delay, target: self, selector: #selector(handleHideTimer(_:)), userInfo: animated, repeats: false)
-        RunLoop.current.add(timer, forMode: .common)
+        RunLoop.current.add(timer, forMode: .commonModes)
         self.hideDelayTimer = timer
     }
     
@@ -491,19 +491,19 @@ public class JSProgressHUD: UIView {
     
     private func addNotification() {
         let notification = NotificationCenter.default
-        notification.addObserver(self, selector: #selector(statusBarOrientationDidChange(_:)), name: UIApplication.didChangeStatusBarOrientationNotification, object: nil)
+        notification.addObserver(self, selector: #selector(statusBarOrientationDidChange(_:)), name: NSNotification.Name.UIApplicationDidChangeStatusBarOrientation, object: nil)
     }
     
     private func removeNotification() {
         let notification = NotificationCenter.default
-        notification.removeObserver(self, name: UIApplication.didChangeStatusBarOrientationNotification, object: nil)
+        notification.removeObserver(self, name: NSNotification.Name.UIApplicationDidChangeStatusBarOrientation, object: nil)
     }
     
     private func updateIndicators() {
         switch self.mode {
         case .loading:
             self.indicatorView?.removeFromSuperview()
-            self.indicatorView = UIActivityIndicatorView(style: .whiteLarge)
+            self.indicatorView = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
             (self.indicatorView as! UIActivityIndicatorView).startAnimating()
             self.bezelView.addSubview(self.indicatorView!)
         case .barProgress:
