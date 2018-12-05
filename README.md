@@ -12,7 +12,7 @@
 
 ## 示例代码
 
-如需要运行示例项目，请 `clone` 当前 `repo` 到本地，并且从根目录下执行 `JSHUD.xcworkspace`，打开项目后切换 `Scheme` 至 `JSHUD-Demo` 即可。
+如需要运行示例项目，请 `clone` 当前 `repo` 到本地，并且从根目录下执行 `JSHUD.xcworkspace`，打开项目后切换 `Scheme` 至 `JSHUD-Demo` 即可。
 
 ## JSHUD 使用方法
 
