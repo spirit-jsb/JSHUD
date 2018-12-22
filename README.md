@@ -181,17 +181,23 @@ DispatchQueue.global().async {
 
 ⚠️ **请确保 `JSHUD` 是在主线程执行的，否则会抛出异常信息！** ⚠️
 
+## Swift 版本依赖
+| Swift | JSHUD       |
+| ------| ------------|
+| 4.0   | 1.0.0~1.0.1 |
+| 4.2   | >= 1.1.0    |
+
 ## 限制条件
 * **iOS 9.0** and Up
 * **Xcode 10.0** and Up
-* **Swift Version = 4.0**
+* **Swift Version = 4.2**
 
 ## 安装
 
 `JSHUD` 可以通过 [CocoaPods](https://cocoapods.org) 获得。安装只需要在你项目的 `Podfile` 中添加如下字段：
 
 ```ruby
-pod 'JSHUD', '~> 1.0.1'
+pod 'JSHUD', '~> 1.1.0'
 ```
 
 ## 作者
