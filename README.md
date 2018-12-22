@@ -2,7 +2,7 @@
 
 <p align="center">
 <a href="https://github.com/apple/swift"><img src="https://img.shields.io/badge/language-swift-red.svg"></a>
-<a href="https://github.com/apple/swift"><img src="https://img.shields.io/badge/swift%20version-4.0-orange.svg"></a>
+<a href="https://github.com/apple/swift"><img src="https://img.shields.io/badge/swift%20version-4.2-orange.svg"></a>
 <a href="https://github.com/spirit-jsb/JSHUD/"><img src="https://img.shields.io/cocoapods/v/JSHUD.svg?style=flat"></a>
 <a href="https://github.com/spirit-jsb/JSHUD/blob/master/LICENSE"><img src="https://img.shields.io/cocoapods/l/JSHUD.svg?style=flat"></a>
 <a href="https://cocoapods.org/pods/JSHUD"><img src="https://img.shields.io/cocoapods/p/JSHUD.svg?style=flat"></a>
