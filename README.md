@@ -197,7 +197,7 @@ DispatchQueue.global().async {
 `JSHUD` 可以通过 [CocoaPods](https://cocoapods.org) 获得。安装只需要在你项目的 `Podfile` 中添加如下字段：
 
 ```ruby
-pod 'JSHUD', '~> 1.1.0'
+pod 'JSHUD', '~> 1.1.1'
 ```
 
 ## 作者
