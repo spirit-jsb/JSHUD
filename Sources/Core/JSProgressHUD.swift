@@ -355,6 +355,7 @@ public class JSHUD: UIView {
         self.label.adjustsFontSizeToFitWidth = false
         self.label.textAlignment = .center
         self.label.textColor = self.contentColor
+        self.label.numberOfLines = 0
         self.label.font = UIFont.boldSystemFont(ofSize: JSHUD.JSDefaultLabelFontSize)
         
         self.label.translatesAutoresizingMaskIntoConstraints = false
