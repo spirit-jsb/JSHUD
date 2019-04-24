@@ -2,7 +2,7 @@
 
 <p align="center">
 <a href="https://github.com/apple/swift"><img src="https://img.shields.io/badge/language-swift-red.svg"></a>
-<a href="https://github.com/apple/swift"><img src="https://img.shields.io/badge/swift%20version-4.2-orange.svg"></a>
+<a href="https://github.com/apple/swift"><img src="https://img.shields.io/badge/swift%20version-5.0-orange.svg"></a>
 <a href="https://github.com/spirit-jsb/JSHUD/"><img src="https://img.shields.io/cocoapods/v/JSHUD.svg?style=flat"></a>
 <a href="https://github.com/spirit-jsb/JSHUD/blob/master/LICENSE"><img src="https://img.shields.io/cocoapods/l/JSHUD.svg?style=flat"></a>
 <a href="https://cocoapods.org/pods/JSHUD"><img src="https://img.shields.io/cocoapods/p/JSHUD.svg?style=flat"></a>
@@ -186,18 +186,19 @@ DispatchQueue.global().async {
 | ------| ------------|
 | 4.0   | 1.0.0~1.0.1 |
 | 4.2   | >= 1.1.0    |
+| 5.0   | >= 1.2.0    |
 
 ## 限制条件
 * **iOS 9.0** and Up
 * **Xcode 10.0** and Up
-* **Swift Version = 4.2**
+* **Swift Version = 5.0**
 
 ## 安装
 
 `JSHUD` 可以通过 [CocoaPods](https://cocoapods.org) 获得。安装只需要在你项目的 `Podfile` 中添加如下字段：
 
 ```ruby
-pod 'JSHUD', '~> 1.1.1'
+pod 'JSHUD', '~> 1.2.0'
 ```
 
 ## 作者
