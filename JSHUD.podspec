@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
     s.name             = 'JSHUD'
-    s.version          = '1.1.1'
+    s.version          = '1.2.0'
     s.summary          = '一个简便易用的自定义 Progress HUD 框架。'
   
     s.description      = <<-DESC
@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
   
     s.author           = { 'spirit-jsb' => 'sibo_jian_29903549@163.com' }
   
-    s.swift_version = '4.2'
+    s.swift_version = '5.0'
   
     s.ios.deployment_target = '9.0'
   
